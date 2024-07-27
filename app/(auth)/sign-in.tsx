@@ -25,8 +25,8 @@ export default function SignInView() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const [formData, setFormData] = useState<FormProps>({
-    email: '',
-    password: '',
+    email: 'ruarruar17@gmail.com',
+    password: 'tester',
   })
 
   const handleChangeFormData = ({ key, value }: HandleChange) => {
@@ -96,6 +96,7 @@ export default function SignInView() {
               onChangeText={(value: string) =>
                 handleChangeFormData({ key: 'email', value })
               }
+              autoCapitalize={'none'}
               onSubmitEditing={() => handleChangeFocus(1)}
               enterKeyHint="next"
               isEditing={isFocus[1]}

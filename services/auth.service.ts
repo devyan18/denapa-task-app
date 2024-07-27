@@ -15,8 +15,9 @@ export class AuthService {
     password: string
   }) {
     try {
+      console.log({ email, password })
       console.log(SERVER_URL)
-      const response = await fetch(`${SERVER_URL}/auth/signin`, {
+      const response = await fetch(`${SERVER_URL}/api/auth/sign-in`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,27 +34,19 @@ export class AuthService {
     }
   }
 
-  static async signUp({
-    username,
-    email,
-    password,
-  }: {
-    username: string
-    email: string
-    password: string
-  }) {
+  static async signUp(data: FormData) {
     try {
-      const response = await fetch(`${SERVER_URL}/auth/signup`, {
+      const request = await fetch(`${SERVER_URL}/api/auth/sign-up`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'multipart/form-data',
         },
-        body: JSON.stringify({ username, email, password }),
+        body: data,
       })
 
-      const data = await response.json()
+      const response = await request.json()
 
-      return data as AuthResponse
+      return response as AuthResponse
     } catch (error) {
       console.log('Error signing up', error)
       return null
